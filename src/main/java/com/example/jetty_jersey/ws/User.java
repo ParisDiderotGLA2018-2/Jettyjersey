@@ -10,7 +10,17 @@ import javax.ws.rs.core.MediaType;
 interface UserDAO {
 	static class UserClass {
 		public String login;
-		public String pass;
+		public String password;
+		
+		public UserDAO(String login) {
+			this.login = login;
+			this.password = "password";
+		}
+		
+		public UserDAO(String login, String password) {
+			this.login = login;
+			this.password = password;
+		}
 	}
 	
 	UserClass getUser();
@@ -24,10 +34,8 @@ public class User implements UserDAO {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public UserClass getUser() {
-		UserClass instance = new UserClass();
-		instance.login = "Benjamin";
-		instance.pass = "Mudamuda";
-
+		
+		UserClass instance = new UserClass("Benjamin", "Mudamuda");
 		return instance;
 	}
 
