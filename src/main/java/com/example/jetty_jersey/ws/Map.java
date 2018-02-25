@@ -34,7 +34,7 @@ public class Map implements MapDAO {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/map")
+	@Path("/XMaps")
 	public MapClass getMap() {
 		
 		MapClass instance = new MapClass(Visibility.PUBLIC, "Cafes", new UserClass("Baptiste"));
@@ -48,7 +48,7 @@ public class Map implements MapDAO {
 	public List<MapClass> getMyMaps() {
 		
 		UserClass me = new UserClass("Benjamin");
-		MapClass map1 = new MapClass(Visibility.PUBLIC, "Caf�s", me);
+		MapClass map1 = new MapClass(Visibility.PUBLIC, "Cafes", me);
 		MapClass map2 = new MapClass(Visibility.PRIVATE, "Vacances", me);
 		
 		List<MapClass> instance = new ArrayList<MapClass>();
@@ -66,7 +66,7 @@ public class Map implements MapDAO {
 		UserClass user1 = new UserClass("Baptiste");
 		UserClass user2 = new UserClass("Jude");
 		UserClass user3 = new UserClass("Mary");
-		MapClass map1 = new MapClass(Visibility.PUBLIC, "Caf�s", user1);
+		MapClass map1 = new MapClass(Visibility.PUBLIC, "Cafes", user1);
 		MapClass map2 = new MapClass(Visibility.PUBLIC, "Places to go with friends", user2);
 		MapClass map3 = new MapClass(Visibility.PUBLIC, "Parties", user3);
 		
@@ -86,7 +86,7 @@ public class Map implements MapDAO {
 		UserClass user1 = new UserClass("Baptiste");
 		UserClass user2 = new UserClass("Jude");
 		UserClass user3 = new UserClass("Mary");
-		MapClass map1 = new MapClass(Visibility.FRIENDS, "Caf�s", user1);
+		MapClass map1 = new MapClass(Visibility.FRIENDS, "Cafes", user1);
 		MapClass map2 = new MapClass(Visibility.PUBLIC, "Places to go with friends", user2);
 		MapClass map3 = new MapClass(Visibility.FRIENDS, "Parties", user3);
 		
