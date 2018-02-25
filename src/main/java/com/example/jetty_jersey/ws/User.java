@@ -8,23 +8,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 interface UserDAO {
-	static class UserClass {
-		public String login;
-		public String password;
-		
-		public UserClass(String login) {
-			this.login = login;
-			this.password = "password";
-		}
-		
-		public UserClass(String login, String password) {
-			this.login = login;
-			this.password = password;
-		}
-	}
-	
 	UserClass getUser();
 	void retrieveUser(UserClass instance);
+}
+
+class UserClass {
+	public String login;
+	public String password;
+	
+	public UserClass(String login) {
+		this.login = login;
+		this.password = "password";
+	}
+	
+	public UserClass(String login, String password) {
+		this.login = login;
+		this.password = password;
+	}
 }
 
 @Path("/index")
