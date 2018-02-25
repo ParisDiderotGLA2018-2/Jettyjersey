@@ -7,25 +7,26 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import com.example.jetty_jersey.ws.User;
 
 interface MapDAO {
 	
-	public enum Visiblity {
+	public static enum Visibilite {
 		PUBLIC,
 		FRIENDS,
 		PRIVATE;
 	}
 	
 	static class MapClass {
-		public Visibility visibility;
+		public Visibilite visibilite;
 		public String name;
 		public User user;
-	}
-	
-	public MapClass(Visibility visibility, String name, User user) {
-		this.visibility = visibility;
-		this.name = name;
-		this.retrieveUser= user;
+		
+		public MapClass(Visibilite visibilite, String name, User user) {
+			this.visibilite = visibilite;
+			this.name = name;
+			this.user = user;
+		}
 	}
 	
 	MapClass getMap();
@@ -43,11 +44,7 @@ public class Map implements MapDAO {
 	@Path("/map")
 	public MapClass getMap() {
 		
-		MapClass instance = new MapClass();
-		instance.visibility = PUBLIC;
-		instance.name = "Cafés";
-		User person = new Map
-		instance.user = person;
+		MapClass instance = new MapClass(Visibilite.PUBLIC, "Cafes", new UserClass("Baptiste"));
 
 		return instance;
 	}
@@ -58,10 +55,10 @@ public class Map implements MapDAO {
 	public List<MapClass> getMyMaps() {
 		
 		UserClass me = new UserClass("Benjamin");
-		MapClass map1 = new MapClass(PUBLIC, "Cafés", me):
-		MapClass map2 = new MapClass(PRIVATE, "Vacances", me);
+		MapClass map1 = new MapClass(Visibilite.PUBLIC, "Cafés", me);
+		MapClass map2 = new MapClass(Visibilite.PRIVATE, "Vacances", me);
 		
-		List<MapClass> instance = new List<MapClass>();
+		List<MapClass> instance = new ArrayList<MapClass>();
 		instance.add(map1);
 		instance.add(map2);
 
@@ -76,11 +73,11 @@ public class Map implements MapDAO {
 		UserClass user1 = new UserClass("Baptiste");
 		UserClass user2 = new UserClass("Jude");
 		UserClass user3 = new UserClass("Mary");
-		MapClass map1 = new MapClass(PUBLIC, "Cafés", user1):
-		MapClass map2 = new MapClass(PUBLIC, "Places to go with friends", user2);
-		MapClass map3 = new MapClass(PUBLIC, "Parties", user3);
+		MapClass map1 = new MapClass(Visibilite.PUBLIC, "Cafés", user1):
+		MapClass map2 = new MapClass(Visibilite.PUBLIC, "Places to go with friends", user2);
+		MapClass map3 = new MapClass(Visibilite.PUBLIC, "Parties", user3);
 		
-		List<MapClass> instance = new List<MapClass>();
+		List<MapClass> instance = new ArrayList<MapClass>();
 		instance.add(map1);
 		instance.add(map2);
 		instance.add(map3);
@@ -96,11 +93,11 @@ public class Map implements MapDAO {
 		UserClass user1 = new UserClass("Baptiste");
 		UserClass user2 = new UserClass("Jude");
 		UserClass user3 = new UserClass("Mary");
-		MapClass map1 = new MapClass(FRIENDS, "Cafés", user1):
-		MapClass map2 = new MapClass(PUBLIC, "Places to go with friends", user2);
-		MapClass map3 = new MapClass(FRIENDS, "Parties", user3);
+		MapClass map1 = new MapClass(Visibilite.FRIENDS, "Cafés", user1):
+		MapClass map2 = new MapClass(Visibilite.PUBLIC, "Places to go with friends", user2);
+		MapClass map3 = new MapClass(Visibilite.FRIENDS, "Parties", user3);
 		
-		List<MapClass> instance = new List<MapClass>();
+		List<MapClass> instance = new ArrayList<MapClass>();
 		instance.add(map1);
 		instance.add(map2);
 		instance.add(map3);
