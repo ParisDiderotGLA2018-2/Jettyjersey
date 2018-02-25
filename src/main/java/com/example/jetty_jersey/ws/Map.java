@@ -1,5 +1,6 @@
 package com.example.jetty_jersey.ws;
 
+import java.util.*;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -8,6 +9,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 interface MapDAO {
+	
+	public enum Visiblity {
+		PUBLIC,
+		FRIENDS,
+		PRIVATE;
+	}
+	
 	static class MapClass {
 		public Visibility visibility;
 		public String name;
