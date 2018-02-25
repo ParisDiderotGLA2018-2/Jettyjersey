@@ -14,6 +14,12 @@ interface MapDAO {
 		public User user;
 	}
 	
+	public MapClass(Visibility visibility, String name, User user) {
+		this.visibility = visibility;
+		this.name = name;
+		this.retrieveUser= user;
+	}
+	
 	MapClass getMap();
 	List<MapClass> getMyMaps();
 	List<MapClass> getPubMaps();
@@ -23,12 +29,6 @@ interface MapDAO {
 
 @Path("/index")
 public class Map implements MapDAO {
-	
-	public MapClass(Visibility visibility, String name, User user) {
-		this.visibility = visibility;
-		this.name = name;
-		this.retrieveUser= user;
-	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
