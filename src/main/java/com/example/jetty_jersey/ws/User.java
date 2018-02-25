@@ -12,12 +12,12 @@ interface UserDAO {
 		public String login;
 		public String password;
 		
-		public UserDAO(String login) {
+		public UserClass(String login) {
 			this.login = login;
 			this.password = "password";
 		}
 		
-		public UserDAO(String login, String password) {
+		public UserClass(String login, String password) {
 			this.login = login;
 			this.password = password;
 		}
