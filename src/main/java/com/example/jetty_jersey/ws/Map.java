@@ -11,9 +11,9 @@ import com.example.jetty_jersey.ws.User;
 
 interface MapDAO {
 	MapClass getMap();
-	List<MapClass> getMyMaps();
-	List<MapClass> getPubMaps();
-	List<MapClass> getFrdMaps();
+	ListMapClass getMyMaps();
+	ListMapClass getPubMaps();
+	ListMapClass getFrdMaps();
 	void retrieveMap(MapClass instance);
 }
 
@@ -26,6 +26,22 @@ class MapClass {
 		this.visibilite = visibilite;
 		this.name = name;
 		this.user = user;
+	}
+}
+
+class ListMapClass {
+	public ArrayList<MapClass> list;
+	
+	public ListMapClass() {
+		this.list = new ArrayList<MapClass>();
+	}
+	
+	public ListMapClass(ArrayList<MapClass> list) {
+		this.list = list;
+	}
+	
+	public void addMap(MapClass map) {
+		this.list.add(map);
 	}
 }
 
@@ -45,15 +61,15 @@ public class Map implements MapDAO {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/myMaps")
-	public List<MapClass> getMyMaps() {
+	public ListMapClass getMyMaps() {
 		
 		UserClass me = new UserClass("Benjamin");
 		MapClass map1 = new MapClass(Visibility.PUBLIC, "Cafes", me);
 		MapClass map2 = new MapClass(Visibility.PRIVATE, "Vacances", me);
 		
-		List<MapClass> instance = new ArrayList<MapClass>();
-		instance.add(map1);
-		instance.add(map2);
+		ListMapClass instance = new ListMapClass();
+		instance.addMap(map1);
+		instance.addMap(map2);
 
 		return instance;
 	}
@@ -61,7 +77,7 @@ public class Map implements MapDAO {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/pubMaps")
-	public List<MapClass> getPubMaps() {
+	public ListMapClass getPubMaps() {
 		
 		UserClass user1 = new UserClass("Baptiste");
 		UserClass user2 = new UserClass("Jude");
@@ -70,10 +86,10 @@ public class Map implements MapDAO {
 		MapClass map2 = new MapClass(Visibility.PUBLIC, "Places to go with friends", user2);
 		MapClass map3 = new MapClass(Visibility.PUBLIC, "Parties", user3);
 		
-		List<MapClass> instance = new ArrayList<MapClass>();
-		instance.add(map1);
-		instance.add(map2);
-		instance.add(map3);
+		ListMapClass instance = new ListMapClass();
+		instance.addMap(map1);
+		instance.addMap(map2);
+		instance.addMap(map3);
 
 		return instance;
 	}
@@ -81,7 +97,7 @@ public class Map implements MapDAO {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/frdMaps")
-	public List<MapClass> getFrdMaps() {
+	public ListMapClass getFrdMaps() {
 		
 		UserClass user1 = new UserClass("Baptiste");
 		UserClass user2 = new UserClass("Jude");
@@ -90,10 +106,10 @@ public class Map implements MapDAO {
 		MapClass map2 = new MapClass(Visibility.PUBLIC, "Places to go with friends", user2);
 		MapClass map3 = new MapClass(Visibility.FRIENDS, "Parties", user3);
 		
-		List<MapClass> instance = new ArrayList<MapClass>();
-		instance.add(map1);
-		instance.add(map2);
-		instance.add(map3);
+		ListMapClass instance = new ListMapClass();
+		instance.addMap(map1);
+		instance.addMap(map2);
+		instance.addMap(map3);
 
 		return instance;
 	}
