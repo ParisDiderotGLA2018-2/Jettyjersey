@@ -10,7 +10,9 @@ import javax.ws.rs.core.MediaType;
 import com.example.jetty_jersey.ws.User;
 
 interface MapDAO {
-	MapClass getMap();
+	MapClass getMyMap();
+	MapClass getFrdMap();
+	MapClass getPubMap();
 	ListMapClass getMyMaps();
 	ListMapClass getPubMaps();
 	ListMapClass getFrdMaps();
@@ -50,8 +52,28 @@ public class Map implements MapDAO {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/XMaps")
-	public MapClass getMap() {
+	@Path("/myMaps")
+	public MapClass getMyMap() {
+		
+		MapClass instance = new MapClass(Visibility.PRIVATE, "Cafes", new UserClass("Benjamin"));
+
+		return instance;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/frdMaps")
+	public MapClass getFrdMap() {
+		
+		MapClass instance = new MapClass(Visibility.FRIENDS, "Cafes", new UserClass("Baptiste"));
+
+		return instance;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/pubMaps")
+	public MapClass getPubMap() {
 		
 		MapClass instance = new MapClass(Visibility.PUBLIC, "Cafes", new UserClass("Baptiste"));
 
