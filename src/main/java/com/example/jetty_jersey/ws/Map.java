@@ -1,7 +1,9 @@
 package com.example.jetty_jersey.ws;
 
 import java.util.*;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -46,7 +48,7 @@ public class Map implements MapDAO {
 		
 		User user = new User("Benjamin", "MudaMuda");
 		Map instance = new Map("Chasse au tresor", user, Visibility.PUBLIC);
-		instance.ajouterUnLieu(new Location("Marché", 200, 100));
+		instance.ajouterUnLieu(new Location("Marchï¿½", 200, 100));
 		instance.ajouterUnLieu(new Location("Bar", 70, 200));
 		return instance;
 	}
@@ -81,7 +83,7 @@ public class Map implements MapDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/map/edit")
-	public void editMap(int id, Map instance) {
+	public void editMap(@FormParam("id") int id, Map instance) {
 		
 		System.out.println(instance.name);
 	}

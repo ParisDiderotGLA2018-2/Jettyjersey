@@ -1,7 +1,9 @@
 package com.example.jetty_jersey.ws;
 
 import java.util.*;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -60,7 +62,7 @@ public class ListTag implements ListTagDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/tag/edit/list")
-	public void editListTag(int id, ListTag instance) {
+	public void editListTag(@FormParam("id") int id, ListTag instance) {
 		
 		System.out.println("editListTag done");
 	}

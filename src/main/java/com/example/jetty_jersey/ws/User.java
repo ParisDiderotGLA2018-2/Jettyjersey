@@ -1,6 +1,7 @@
 package com.example.jetty_jersey.ws;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -53,7 +54,7 @@ public class User implements UserDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login/edit")
-	public void editUser(int id, User instance) {
+	public void editUser(@FormParam("id") int id, User instance) {
 		
 		/**
 		 * id : l'id du user a modifier (son nom)

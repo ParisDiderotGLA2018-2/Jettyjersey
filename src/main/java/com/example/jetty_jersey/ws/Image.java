@@ -1,7 +1,9 @@
 package com.example.jetty_jersey.ws;
 
 import java.util.*;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -43,7 +45,7 @@ public class Image implements ImageDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/image/edit")
-	public void editImage(int id, Image instance) {
+	public void editImage(@FormParam("id") int id, Image instance) {
 		
 		System.out.println(instance.name);
 	}

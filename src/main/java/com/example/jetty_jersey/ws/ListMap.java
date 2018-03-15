@@ -1,7 +1,9 @@
 package com.example.jetty_jersey.ws;
 
 import java.util.*;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -61,7 +63,7 @@ public class ListMap implements ListMapDAO {
 		
 		ListMap instance = new ListMap();
 		User user = new User("Horace", "MudaMuda");
-		Map map1 = new Map("Fêtes", user, Visibility.FRIENDS);
+		Map map1 = new Map("Fï¿½tes", user, Visibility.FRIENDS);
 		map1.ajouterUnLieu(new Location("Concert", 300, 160));
 		map1.ajouterUnLieu(new Location("Nightclub", 300, 200));
 		User user2 = new User("Khawla", "MudaMuda");
@@ -81,7 +83,7 @@ public class ListMap implements ListMapDAO {
 		ListMap instance = new ListMap();
 		User user = new User("Valentin", "MudaMuda");
 		Map map1 = new Map("Chasse au tresor", user, Visibility.PUBLIC);
-		map1.ajouterUnLieu(new Location("Marché", 200, 100));
+		map1.ajouterUnLieu(new Location("Marchï¿½", 200, 100));
 		map1.ajouterUnLieu(new Location("Bar", 70, 200));
 		User user2 = new User("Benjamin", "MudaMuda");
 		Map map2 = new Map("Liste des cafes", user2, Visibility.PUBLIC);
@@ -103,7 +105,7 @@ public class ListMap implements ListMapDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/map/edit/list")
-	public void editListMap(int id, ListMap instance) {
+	public void editListMap(@FormParam("id") int id, ListMap instance) {
 		
 		System.out.println("editListMap done");
 	}

@@ -1,7 +1,9 @@
 package com.example.jetty_jersey.ws;
 
 import java.util.*;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -60,7 +62,7 @@ public class ListMessage implements ListMessageDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/message/edit/list")
-	public void editListMessage(int id, ListMessage instance) {
+	public void editListMessage(@FormParam("id") int id, ListMessage instance) {
 		
 		System.out.println("editListMessage done");
 	}

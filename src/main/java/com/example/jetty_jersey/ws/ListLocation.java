@@ -1,7 +1,9 @@
 package com.example.jetty_jersey.ws;
 
 import java.util.*;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -60,7 +62,7 @@ public class ListLocation implements ListLocationDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/location/edit/list")
-	public void editListLocation(int id, ListLocation instance) {
+	public void editListLocation(@FormParam("id") int id, ListLocation instance) {
 		
 		System.out.println("editListLocation done");
 	}
