@@ -11,41 +11,43 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 interface ListTagDAO {
-	ListTag getListTag();
-	void addListTag(ListTag instance);
-	void editListTag(int id, ListTag instance);
-	void deleteListTag(ListTag instance);
+	ListTagClass getListTag();
+	void addListTag(ListTagClass instance);
+	void editListTag(int id, ListTagClass instance);
+	void deleteListTag(ListTagClass instance);
 }
 
-@Path("/index")
-public class ListTag implements ListTagDAO {
-	
-	public ArrayList<Tag> list;
+class ListTagClass {
+	public ArrayList<TagClass> list;
 	
 	// constructors
 	
-	public ListTag() {
-		this.list = new ArrayList<Tag>();
+	public ListTagClass() {
+		this.list = new ArrayList<TagClass>();
 	}
 	
-	public ListTag(ArrayList<Tag> list) {
+	public ListTagClass(ArrayList<TagClass> list) {
 		this.list = list;
 	}
 	
 	// methods
 	
 	public void ajouterUnTag(String name) {
-		this.list.add(new Tag(name));
+		this.list.add(new TagClass(name));
 	}
+}
+
+@Path("/index")
+public class ListTag implements ListTagDAO {
 	
 	// webservices
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/tag/list")
-	public ListTag getListTag() {
+	public ListTagClass getListTag() {
 		
-		ListTag instance = new ListTag();
+		ListTagClass instance = new ListTagClass();
 		instance.ajouterUnTag("Treasure Quest");
 		instance.ajouterUnTag("Paris");
 		return instance;
@@ -54,7 +56,7 @@ public class ListTag implements ListTagDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/tag/add/list")
-	public void addListTag(ListTag instance) {
+	public void addListTag(ListTagClass instance) {
 		
 		System.out.println("addListTag done");
 	}
@@ -62,7 +64,7 @@ public class ListTag implements ListTagDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/tag/edit/list")
-	public void editListTag(@FormParam("id") int id, ListTag instance) {
+	public void editListTag(@FormParam("id") int id, ListTagClass instance) {
 		
 		System.out.println("editListTag done");
 	}
@@ -70,7 +72,7 @@ public class ListTag implements ListTagDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/tag/delete/list")
-	public void deleteListTag(ListTag instance) {
+	public void deleteListTag(ListTagClass instance) {
 		
 		System.out.println("deleteListTag done");
 	}
