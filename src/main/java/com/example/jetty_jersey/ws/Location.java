@@ -1,5 +1,6 @@
 package com.example.jetty_jersey.ws;
 
+import java.util.*;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -8,44 +9,60 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 interface LocationDAO {
-	LocationClass getLocation();
-	void retrieveLocation(LocationClass instance);
-}
-
-class LocationClass {
-	public int coordX;
-	public int coordY;
-	public String name;
-	
-	public LocationClass(int coordX, int coordY) {
-		this.coordX = coordX;
-		this.coordY = coordY;
-		this.name = "Nouvel endroit";
-	}
-	
-	public LocationClass(int coordX, int coordY, String name) {
-		this.coordX = coordX;
-		this.coordY = coordY;
-		this.name = name;
-	}
+	Location getLocation();
+	void addLocation(Location instance);
+	void editLocation(int id, Location instance);
+	void deleteLocation(Location instance);
 }
 
 @Path("/index")
 public class Location implements LocationDAO {
 	
+	public String name;
+	public int posX;
+	public int posY;
+	public ListMessage listMessage;
+	public ListImage listImage;
+
+	
+	public Location(String name, int posX, int posY) {
+		this.name = name;
+		this.posX = posX;
+		this.posY = posY;
+		this.listMessage = new ListMessage();
+		this.listImage = new ListImage();
+	}
+	
+	// webservices
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/location")
-	public LocationClass getLocation() {
+	public Location getLocation() {
 		
-		LocationClass instance = new LocationClass(50, 100, "Cafe de la Gare");
+		Location instance = new Location("Cafe de la Gare", 50, 100);
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/location")
-	public void retrieveLocation(LocationClass instance) {
+	@Path("/location/add")
+	public void addLocation(Location instance) {
+		System.out.println(instance.name);
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/location/edit")
+	public void editLocation(int id, Location instance) {
+		
+		System.out.println(instance.name);
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/location/delete")
+	public void deleteLocation(Location instance) {
 		System.out.println(instance.name);
 	}
 
