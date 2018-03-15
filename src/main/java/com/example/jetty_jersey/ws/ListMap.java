@@ -48,7 +48,7 @@ public class ListMap implements ListMapDAO {
 	public ListMap getMyMaps() {
 		
 		ListMap instance = new ListMap();
-		User user = new User("Hamza", "MudaMuda");
+		UserClass user = new UserClass("Hamza", "MudaMuda");
 		Map map1 = new Map("Carte des vacances", user, Visibility.PRIVATE);
 		map1.ajouterUnLieu(new Location("Lieu 1", 30, 100));
 		map1.ajouterUnLieu(new Location("Lieu 2", 70, 190));
@@ -62,11 +62,11 @@ public class ListMap implements ListMapDAO {
 	public ListMap getFriendMaps() {
 		
 		ListMap instance = new ListMap();
-		User user = new User("Horace", "MudaMuda");
+		UserClass user = new UserClass("Horace", "MudaMuda");
 		Map map1 = new Map("F�tes", user, Visibility.FRIENDS);
 		map1.ajouterUnLieu(new Location("Concert", 300, 160));
 		map1.ajouterUnLieu(new Location("Nightclub", 300, 200));
-		User user2 = new User("Khawla", "MudaMuda");
+		UserClass user2 = new UserClass("Khawla", "MudaMuda");
 		Map map2 = new Map("Liste des cafes", user2, Visibility.PUBLIC);
 		map2.ajouterUnLieu(new Location("Cafe de la Gare", 50, 100));
 		map2.ajouterUnLieu(new Location("Cafe de la Paix", 70, 80));
@@ -81,11 +81,11 @@ public class ListMap implements ListMapDAO {
 	public ListMap getPublicMaps() {
 		
 		ListMap instance = new ListMap();
-		User user = new User("Valentin", "MudaMuda");
+		UserClass user = new UserClass("Valentin", "MudaMuda");
 		Map map1 = new Map("Chasse au tresor", user, Visibility.PUBLIC);
 		map1.ajouterUnLieu(new Location("March�", 200, 100));
 		map1.ajouterUnLieu(new Location("Bar", 70, 200));
-		User user2 = new User("Benjamin", "MudaMuda");
+		UserClass user2 = new UserClass("Benjamin", "MudaMuda");
 		Map map2 = new Map("Liste des cafes", user2, Visibility.PUBLIC);
 		map2.ajouterUnLieu(new Location("Cafe de la Gare", 50, 100));
 		map2.ajouterUnLieu(new Location("Cafe de la Paix", 70, 80));

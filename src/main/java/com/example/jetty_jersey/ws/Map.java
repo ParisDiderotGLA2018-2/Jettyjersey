@@ -21,7 +21,7 @@ interface MapDAO {
 public class Map implements MapDAO {
 	
 	public String name;
-	public User creator;
+	public UserClass creator;
 	public Visibility visibilite;
 	public ListLocation listLocation;
 	public Date creationDate;
@@ -29,7 +29,7 @@ public class Map implements MapDAO {
 	// constructors
 
 	
-	public Map(String name, User creator, Visibility visibilite) {
+	public Map(String name, UserClass creator, Visibility visibilite) {
 		this.name = name;
 		this.creator = creator;
 		this.visibilite = visibilite;
@@ -46,7 +46,7 @@ public class Map implements MapDAO {
 	
 	public Map createInstanceOfMap1() {	
 		
-		User user = new User("Benjamin", "MudaMuda");
+		UserClass user = new UserClass("Benjamin", "MudaMuda");
 		Map instance = new Map("Chasse au tresor", user, Visibility.PUBLIC);
 		instance.ajouterUnLieu(new Location("March�", 200, 100));
 		instance.ajouterUnLieu(new Location("Bar", 70, 200));
@@ -55,7 +55,7 @@ public class Map implements MapDAO {
 	
 	public Map createInstanceOfMap2() {	
 		
-		User user = new User("Hamza", "MudaMuda");
+		UserClass user = new UserClass("Hamza", "MudaMuda");
 		Map instance = new Map("Liste des cafes", user, Visibility.PUBLIC);
 		instance.ajouterUnLieu(new Location("Cafe de la Gare", 50, 100));
 		instance.ajouterUnLieu(new Location("Cafe de la Paix", 70, 80));
