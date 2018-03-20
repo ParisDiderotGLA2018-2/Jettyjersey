@@ -16,8 +16,11 @@ interface UserDAO {
 }
 
 class UserClass {
+	
 	public String login;
 	public String password;
+	
+	// constructors
 	
 	public UserClass(String login) {
 		this.login = login;
@@ -32,10 +35,6 @@ class UserClass {
 
 @Path("/index")
 public class User implements UserDAO {
-	
-	// constructors
-	
-	// webservices
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
