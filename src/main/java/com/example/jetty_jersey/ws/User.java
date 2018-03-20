@@ -7,10 +7,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 interface UserDAO {
 	UserClass getUser();
-	void addUser(UserClass instance);
+	UserClass addUser(UserClass instance);
 	void editUser(int id, UserClass instance);
 	void deleteUser(UserClass instance);
 }
@@ -48,8 +49,11 @@ public class User implements UserDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login/add")
-	public void addUser(UserClass instance) {
+	public UserClass addUser(UserClass instance) {
+	//	return Response.status(Response.Status.Forbidden).entity(myPOJO).build();
 		System.out.println(instance.login);
+		UserClass inst = new UserClass("Benjamin", "Mudamuda");
+		return inst;
 	}
 	
 	@POST
