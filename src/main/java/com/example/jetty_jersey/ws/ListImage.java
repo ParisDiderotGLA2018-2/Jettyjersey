@@ -10,69 +10,71 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface ListImageDAO {
-	ListImage getListImage();
-	void addListImage(ListImage instance);
-	void editListImage(int id, ListImage instance);
-	void deleteListImage(ListImage instance);
+interface ListImageClassDAO {
+	ListImageClass getListImage();
+	void addListImage(ListImageClass instance);
+	void editListImage(int id, ListImageClass instance);
+	void deleteListImage(ListImageClass instance);
 }
 
-@Path("/index")
-public class ListImage implements ListImageDAO {
+class ListImageClass {
 	
-	public ArrayList<Image> list;
+	public ArrayList<ImageClass> list;
 	
 	// constructors
 	
-	public ListImage() {
-		this.list = new ArrayList<Image>();
+	public ListImageClass() {
+		this.list = new ArrayList<ImageClass>();
 	}
 	
-	public ListImage(ArrayList<Image> list) {
+	public ListImageClass(ArrayList<ImageClass> list) {
 		this.list = list;
 	}
 	
 	// methods
 	
-	public void ajouterUneImage(String name) {
-		this.list.add(new Image(name));
+	public void ajouterUneImageClass(String name) {
+		this.list.add(new ImageClass(name));
 	}
 	
-	// webservices
+}
+
+@Path("/index")
+public class ListImage implements ListImageClassDAO {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/image/list")
-	public ListImage getListImage() {
+	@Path("/ImageClass/list")
+	public ListImageClass getListImage() {
 		
-		ListImage instance = new ListImage();
-		instance.ajouterUneImage("https://www.rd.com/wp-content/uploads/2017/07/The-Eiffel-Towers-Electric-Bill-Is-Absurd_166143854_Brian-Kinney-1024x683.jpg");
-		instance.ajouterUneImage("https://media-cdn.tripadvisor.com/media/photo-s/00/12/6d/03/the-view-from-the-top.jpg");
+		ListImageClass instance = new ListImageClass();
+		instance.ajouterUneImageClass("https://www.rd.com/wp-content/uploads/2017/07/The-Eiffel-Towers-Electric-Bill-Is-Absurd_166143854_Brian-Kinney-1024x683.jpg");
+		instance.ajouterUneImageClass("https://media-cdn.tripadvisor.com/media/photo-s/00/12/6d/03/the-view-from-the-top.jpg");
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/image/add/list")
-	public void addListImage(ListImage instance) {
+	@Path("/ImageClass/add/list")
+	public void addListImage(ListImageClass instance) {
 		
-		System.out.println("addListImage done");
+		System.out.println("addListImageClass done");
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/image/edit/list")
-	public void editListImage(@FormParam("id") int id, ListImage instance) {
+	@Path("/ImageClass/edit/list")
+	public void editListImage(@FormParam("id") int id, ListImageClass instance) {
 		
-		System.out.println("editListImage done");
+		System.out.println("editListImageClass done");
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/image/delete/list")
-	public void deleteListImage(ListImage instance) {
+	@Path("/ImageClass/delete/list")
+	public void deleteListImage(ListImageClass instance) {
 		
-		System.out.println("deleteListImage done");
+		System.out.println("deleteListImageClass done");
 	}
 
 }

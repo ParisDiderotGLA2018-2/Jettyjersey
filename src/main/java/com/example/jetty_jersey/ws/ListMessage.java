@@ -10,69 +10,71 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface ListMessageDAO {
-	ListMessage getListMessage();
-	void addListMessage(ListMessage instance);
-	void editListMessage(int id, ListMessage instance);
-	void deleteListMessage(ListMessage instance);
+interface ListMessageClassDAO {
+	ListMessageClass getListMessage();
+	void addListMessage(ListMessageClass instance);
+	void editListMessage(int id, ListMessageClass instance);
+	void deleteListMessage(ListMessageClass instance);
 }
 
-@Path("/index")
-public class ListMessage implements ListMessageDAO {
+class ListMessageClass {
 	
-	public ArrayList<Message> list;
+	public ArrayList<MessageClass> list;
 	
 	// constructors
 	
-	public ListMessage() {
-		this.list = new ArrayList<Message>();
+	public ListMessageClass() {
+		this.list = new ArrayList<MessageClass>();
 	}
 	
-	public ListMessage(ArrayList<Message> list) {
+	public ListMessageClass(ArrayList<MessageClass> list) {
 		this.list = list;
 	}
 	
 	// methods
 	
-	public void ajouterUnMessage(String name) {
-		this.list.add(new Message(name));
+	public void ajouterUnMessageClass(String name) {
+		this.list.add(new MessageClass(name));
 	}
 	
-	// webservices
+}
+
+@Path("/index")
+public class ListMessage implements ListMessageClassDAO {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/message/list")
-	public ListMessage getListMessage() {
+	@Path("/MessageClass/list")
+	public ListMessageClass getListMessage() {
 		
-		ListMessage instance = new ListMessage();
-		instance.ajouterUnMessage("J'adorerai venir !!");
-		instance.ajouterUnMessage("C'est payant ?");
+		ListMessageClass instance = new ListMessageClass();
+		instance.ajouterUnMessageClass("J'adorerai venir !!");
+		instance.ajouterUnMessageClass("C'est payant ?");
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/message/add/list")
-	public void addListMessage(ListMessage instance) {
+	@Path("/MessageClass/add/list")
+	public void addListMessage(ListMessageClass instance) {
 		
-		System.out.println("addListMessage done");
+		System.out.println("addListMessageClass done");
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/message/edit/list")
-	public void editListMessage(@FormParam("id") int id, ListMessage instance) {
+	@Path("/MessageClass/edit/list")
+	public void editListMessage(@FormParam("id") int id, ListMessageClass instance) {
 		
-		System.out.println("editListMessage done");
+		System.out.println("editListMessageClass done");
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/message/delete/list")
-	public void deleteListMessage(ListMessage instance) {
+	@Path("/MessageClass/delete/list")
+	public void deleteListMessage(ListMessageClass instance) {
 		
-		System.out.println("deleteListMessage done");
+		System.out.println("deleteListMessageClass done");
 	}
 
 }

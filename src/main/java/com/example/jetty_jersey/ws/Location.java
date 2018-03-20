@@ -10,61 +10,63 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface LocationDAO {
-	Location getLocation();
-	void addLocation(Location instance);
-	void editLocation(int id, Location instance);
-	void deleteLocation(Location instance);
+interface LocationClassDAO {
+	LocationClass getLocation();
+	void addLocation(LocationClass instance);
+	void editLocation(int id, LocationClass instance);
+	void deleteLocation(LocationClass instance);
 }
 
-@Path("/index")
-public class Location implements LocationDAO {
+class LocationClass {
 	
 	public String name;
 	public int posX;
 	public int posY;
-	public ListMessage listMessage;
-	public ListImage listImage;
+	public ListMessageClass listMessage;
+	public ListImageClass listImage;
 
 	
-	public Location(String name, int posX, int posY) {
+	public LocationClass(String name, int posX, int posY) {
 		this.name = name;
 		this.posX = posX;
 		this.posY = posY;
-		this.listMessage = new ListMessage();
-		this.listImage = new ListImage();
+		this.listMessage = new ListMessageClass();
+		this.listImage = new ListImageClass();
 	}
 	
-	// webservices
+}
+
+@Path("/index")
+public class Location implements LocationClassDAO {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/location")
-	public Location getLocation() {
+	@Path("/LocationClass")
+	public LocationClass getLocation() {
 		
-		Location instance = new Location("Cafe de la Gare", 50, 100);
+		LocationClass instance = new LocationClass("Cafe de la Gare", 50, 100);
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/location/add")
-	public void addLocation(Location instance) {
+	@Path("/LocationClass/add")
+	public void addLocation(LocationClass instance) {
 		System.out.println(instance.name);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/location/edit")
-	public void editLocation(@FormParam("id") int id, Location instance) {
+	@Path("/LocationClass/edit")
+	public void editLocation(@FormParam("id") int id, LocationClass instance) {
 		
 		System.out.println(instance.name);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/location/delete")
-	public void deleteLocation(Location instance) {
+	@Path("/LocationClass/delete")
+	public void deleteLocation(LocationClass instance) {
 		System.out.println(instance.name);
 	}
 

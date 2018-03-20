@@ -10,112 +10,114 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface ListMapDAO {
-	ListMap getMyMaps();
-	ListMap getFriendMaps();
-	ListMap getPublicMaps();
-	void addListMap(ListMap instance);
-	void editListMap(int id, ListMap instance);
-	void deleteListMap(ListMap instance);
+interface ListMapClassDAO {
+	ListMapClass getMyMaps();
+	ListMapClass getFriendsMaps();
+	ListMapClass getPublicMaps();
+	void addListMap(ListMapClass instance);
+	void editListMap(int id, ListMapClass instance);
+	void deleteListMap(ListMapClass instance);
 }
 
-@Path("/index")
-public class ListMap implements ListMapDAO {
+class ListMapClass {
 	
-	public ArrayList<Map> list;
+	public ArrayList<MapClass> list;
 	
 	// constructors
 	
-	public ListMap() {
-		this.list = new ArrayList<Map>();
+	public ListMapClass() {
+		this.list = new ArrayList<MapClass>();
 	}
 	
-	public ListMap(ArrayList<Map> list) {
+	public ListMapClass(ArrayList<MapClass> list) {
 		this.list = list;
 	}
 	
 	// methods
 	
-	public void ajouteruneMap(Map instance) {
+	public void ajouteruneMapClass(MapClass instance) {
 		this.list.add(instance);
 	}
 	
-	// webservices
+}
+
+@Path("/index")
+public class ListMap implements ListMapClassDAO {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/myMaps")
-	public ListMap getMyMaps() {
+	@Path("/myMapClasss")
+	public ListMapClass getMyMaps() {
 		
-		ListMap instance = new ListMap();
+		ListMapClass instance = new ListMapClass();
 		UserClass user = new UserClass("Hamza", "MudaMuda");
-		Map map1 = new Map("Carte des vacances", user, Visibility.PRIVATE);
-		map1.ajouterUnLieu(new Location("Lieu 1", 30, 100));
-		map1.ajouterUnLieu(new Location("Lieu 2", 70, 190));
-		instance.ajouteruneMap(map1);
+		MapClass MapClass1 = new MapClass("Carte des vacances", user, Visibility.PRIVATE);
+		MapClass1.ajouterUnLieu(new LocationClass("Lieu 1", 30, 100));
+		MapClass1.ajouterUnLieu(new LocationClass("Lieu 2", 70, 190));
+		instance.ajouteruneMapClass(MapClass1);
 		return instance;
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/frdMaps")
-	public ListMap getFriendMaps() {
+	@Path("/frdMapClasss")
+	public ListMapClass getFriendsMaps() {
 		
-		ListMap instance = new ListMap();
+		ListMapClass instance = new ListMapClass();
 		UserClass user = new UserClass("Horace", "MudaMuda");
-		Map map1 = new Map("F�tes", user, Visibility.FRIENDS);
-		map1.ajouterUnLieu(new Location("Concert", 300, 160));
-		map1.ajouterUnLieu(new Location("Nightclub", 300, 200));
+		MapClass MapClass1 = new MapClass("F�tes", user, Visibility.FRIENDS);
+		MapClass1.ajouterUnLieu(new LocationClass("Concert", 300, 160));
+		MapClass1.ajouterUnLieu(new LocationClass("Nightclub", 300, 200));
 		UserClass user2 = new UserClass("Khawla", "MudaMuda");
-		Map map2 = new Map("Liste des cafes", user2, Visibility.PUBLIC);
-		map2.ajouterUnLieu(new Location("Cafe de la Gare", 50, 100));
-		map2.ajouterUnLieu(new Location("Cafe de la Paix", 70, 80));
-		instance.ajouteruneMap(map1);
-		instance.ajouteruneMap(map2);
+		MapClass MapClass2 = new MapClass("Liste des cafes", user2, Visibility.PUBLIC);
+		MapClass2.ajouterUnLieu(new LocationClass("Cafe de la Gare", 50, 100));
+		MapClass2.ajouterUnLieu(new LocationClass("Cafe de la Paix", 70, 80));
+		instance.ajouteruneMapClass(MapClass1);
+		instance.ajouteruneMapClass(MapClass2);
 		return instance;
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/pubMaps")
-	public ListMap getPublicMaps() {
+	@Path("/pubMapClasss")
+	public ListMapClass getPublicMaps() {
 		
-		ListMap instance = new ListMap();
+		ListMapClass instance = new ListMapClass();
 		UserClass user = new UserClass("Valentin", "MudaMuda");
-		Map map1 = new Map("Chasse au tresor", user, Visibility.PUBLIC);
-		map1.ajouterUnLieu(new Location("March�", 200, 100));
-		map1.ajouterUnLieu(new Location("Bar", 70, 200));
+		MapClass MapClass1 = new MapClass("Chasse au tresor", user, Visibility.PUBLIC);
+		MapClass1.ajouterUnLieu(new LocationClass("March�", 200, 100));
+		MapClass1.ajouterUnLieu(new LocationClass("Bar", 70, 200));
 		UserClass user2 = new UserClass("Benjamin", "MudaMuda");
-		Map map2 = new Map("Liste des cafes", user2, Visibility.PUBLIC);
-		map2.ajouterUnLieu(new Location("Cafe de la Gare", 50, 100));
-		map2.ajouterUnLieu(new Location("Cafe de la Paix", 70, 80));
-		instance.ajouteruneMap(map1);
-		instance.ajouteruneMap(map2);
+		MapClass MapClass2 = new MapClass("Liste des cafes", user2, Visibility.PUBLIC);
+		MapClass2.ajouterUnLieu(new LocationClass("Cafe de la Gare", 50, 100));
+		MapClass2.ajouterUnLieu(new LocationClass("Cafe de la Paix", 70, 80));
+		instance.ajouteruneMapClass(MapClass1);
+		instance.ajouteruneMapClass(MapClass2);
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/map/add/list")
-	public void addListMap(ListMap instance) {
+	@Path("/MapClass/add/list")
+	public void addListMap(ListMapClass instance) {
 		
-		System.out.println("addListMap done");
+		System.out.println("addListMapClass done");
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/map/edit/list")
-	public void editListMap(@FormParam("id") int id, ListMap instance) {
+	@Path("/MapClass/edit/list")
+	public void editListMap(@FormParam("id") int id, ListMapClass instance) {
 		
-		System.out.println("editListMap done");
+		System.out.println("editListMapClass done");
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/map/delete/list")
-	public void deleteListMap(ListMap instance) {
+	@Path("/MapClass/delete/list")
+	public void deleteListMap(ListMapClass instance) {
 		
-		System.out.println("deleteListMap done");
+		System.out.println("deleteListMapClass done");
 	}
 
 }

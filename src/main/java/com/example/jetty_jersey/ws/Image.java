@@ -10,50 +10,53 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface ImageDAO {
-	Image getImage();
-	void addImage(Image instance);
-	void editImage(int id, Image instance);
-	void deleteImage(Image instance);
+interface ImageClassDAO {
+	ImageClass getImage();
+	void addImage(ImageClass instance);
+	void editImage(int id, ImageClass instance);
+	void deleteImage(ImageClass instance);
 }
 
-@Path("/index")
-public class Image implements ImageDAO {
+class ImageClass {
 	
 	public String name;
 	
-	public Image(String name) {
+	public ImageClass(String name) {
 		this.name = name;
 	}
+	
+}
+@Path("/index")
+public class Image implements ImageClassDAO {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/image")
-	public Image getImage() {
+	@Path("/ImageClass")
+	public ImageClass getImage() {
 		
-		Image instance = new Image("https://www.rd.com/wp-content/uploads/2017/07/The-Eiffel-Towers-Electric-Bill-Is-Absurd_166143854_Brian-Kinney-1024x683.jpg");
+		ImageClass instance = new ImageClass("https://www.rd.com/wp-content/uploads/2017/07/The-Eiffel-Towers-Electric-Bill-Is-Absurd_166143854_Brian-Kinney-1024x683.jpg");
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/image/add")
-	public void addImage(Image instance) {
+	@Path("/ImageClass/add")
+	public void addImage(ImageClass instance) {
 		System.out.println(instance.name);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/image/edit")
-	public void editImage(@FormParam("id") int id, Image instance) {
+	@Path("/ImageClass/edit")
+	public void editImage(@FormParam("id") int id, ImageClass instance) {
 		
 		System.out.println(instance.name);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/image/delete")
-	public void deleteImage(Image instance) {
+	@Path("/ImageClass/delete")
+	public void deleteImage(ImageClass instance) {
 		System.out.println(instance.name);
 	}
 

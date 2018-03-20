@@ -10,88 +10,81 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface MapDAO {
-	Map getMap();
-	void addMap(Map instance);
-	void editMap(int id, Map instance);
-	void deleteMap(Map instance);
+interface MapClassDAO {
+	MapClass getMap();
+	void addMap(MapClass instance);
+	void editMap(int id, MapClass instance);
+	void deleteMap(MapClass instance);
 }
 
-@Path("/index")
-public class Map implements MapDAO {
+class MapClass {
 	
 	public String name;
 	public UserClass creator;
 	public Visibility visibilite;
-	public ListLocation listLocation;
+	public ListLocationClass listLocationClass;
 	public Date creationDate;
 	
 	// constructors
 
-	
-	public Map(String name, UserClass creator, Visibility visibilite) {
+	public MapClass(String name, UserClass creator, Visibility visibilite) {
 		this.name = name;
 		this.creator = creator;
 		this.visibilite = visibilite;
-		this.listLocation = new ListLocation();
+		this.listLocationClass = new ListLocationClass();
 		Date date = new GregorianCalendar(2017, Calendar.FEBRUARY, 11).getTime();
 		this.creationDate = date;
 	}
 	
 	// methods
 	
-	public void ajouterUnLieu(Location instance) {
-		this.listLocation.ajouteruneLocation(instance);
+	public void ajouterUnLieu(LocationClass instance) {
+		this.listLocationClass.ajouteruneLocationClass(instance);
 	}
 	
-	public Map createInstanceOfMap1() {	
+	public MapClass devientChasseAuTresor(MapClass instance) {	
 		
-		UserClass user = new UserClass("Benjamin", "MudaMuda");
-		Map instance = new Map("Chasse au tresor", user, Visibility.PUBLIC);
-		instance.ajouterUnLieu(new Location("March�", 200, 100));
-		instance.ajouterUnLieu(new Location("Bar", 70, 200));
+		instance.name = "Chasse au tresor";
+		instance.ajouterUnLieu(new LocationClass("Marche", 200, 100));
+		instance.ajouterUnLieu(new LocationClass("Bar", 70, 200));
 		return instance;
 	}
 	
-	public Map createInstanceOfMap2() {	
-		
-		UserClass user = new UserClass("Hamza", "MudaMuda");
-		Map instance = new Map("Liste des cafes", user, Visibility.PUBLIC);
-		instance.ajouterUnLieu(new Location("Cafe de la Gare", 50, 100));
-		instance.ajouterUnLieu(new Location("Cafe de la Paix", 70, 80));
-		return instance;
-	}
-	
-	// webservices
+}
+
+@Path("/index")
+public class Map implements MapClassDAO {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/map")
-	public Map getMap() {
+	@Path("/MapClass")
+	public MapClass getMap() {
 		
-		Map instance = createInstanceOfMap2();
+		MapClass instance = new MapClass("Liste des cafes", new UserClass("Hamza", "MudaMuda"), Visibility.PUBLIC);
+		instance.ajouterUnLieu(new LocationClass("Cafe de la Gare", 50, 100));
+		instance.ajouterUnLieu(new LocationClass("Cafe de la Paix", 70, 80));
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/map/add")
-	public void addMap(Map instance) {
+	@Path("/MapClass/add")
+	public void addMap(MapClass instance) {
 		System.out.println(instance.name);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/map/edit")
-	public void editMap(@FormParam("id") int id, Map instance) {
+	@Path("/MapClass/edit")
+	public void editMap(@FormParam("id") int id, MapClass instance) {
 		
 		System.out.println(instance.name);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/map/delete")
-	public void deleteMap(Map instance) {
+	@Path("/MapClass/delete")
+	public void deleteMap(MapClass instance) {
 		System.out.println(instance.name);
 	}
 
