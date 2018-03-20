@@ -6,11 +6,13 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 interface UserDAO {
-	UserClass getUser();
+	Response getUser(@QueryParam("name") String name);
 	UserClass addUser(UserClass instance);
 	void editUser(int id, UserClass instance);
 	void deleteUser(UserClass instance);
@@ -40,10 +42,15 @@ public class User implements UserDAO {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/login")
-	public UserClass getUser() {
+	public Response getUser(@QueryParam("name") String name) {
 		
-		UserClass instance = new UserClass("Benjamin", "Mudamuda");
-		return instance;
+		if(name.equals("Benjamin")){
+			
+			UserClass instance = new UserClass("Benjamin", "Mudamuda");
+	        return Response.ok(instance).build();
+		}
+		
+	    return Response.status(Status.NOT_FOUND).build();
 	}
 
 	@POST
