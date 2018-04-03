@@ -19,6 +19,39 @@ interface ListMapClassDAO {
 	void deleteListMap(ListMapClass instance);
 }
 
+class ListMapClassIMP implements ListMapClassDAO {
+
+	public ListMapClass getMyMaps() {
+		
+		return null;
+	}
+
+	public ListMapClass getFriendsMaps() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListMapClass getPublicMaps() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addListMap(ListMapClass instance) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void editListMap(int id, ListMapClass instance) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteListMap(ListMapClass instance) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
 class ListMapClass {
 	
 	public ArrayList<MapClass> list;
@@ -40,7 +73,6 @@ class ListMapClass {
 	}
 	
 }
-
 @Path("/index")
 public class ListMap implements ListMapClassDAO {
 

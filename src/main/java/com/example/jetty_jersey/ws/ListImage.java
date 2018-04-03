@@ -45,6 +45,7 @@ public class ListImage implements ListImageClassDAO {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/ImageClass/list")
+	//TODO : Ajouter un Paramatre 
 	public ListImageClass getListImage() {
 		
 		ListImageClass instance = new ListImageClass();

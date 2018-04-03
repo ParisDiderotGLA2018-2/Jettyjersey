@@ -17,6 +17,30 @@ interface MapClassDAO {
 	void deleteMap(MapClass instance);
 }
 
+class MapIMP implements MapClassDAO{
+
+	public MapClass getMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addMap(MapClass instance) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void editMap(int id, MapClass instance) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteMap(MapClass instance) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
+
 class MapClass {
 	
 	public String name;
