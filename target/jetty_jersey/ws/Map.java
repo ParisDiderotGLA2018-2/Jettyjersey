@@ -17,38 +17,14 @@ interface MapClassDAO {
 	void deleteMap(MapClass instance);
 }
 
-class MapIMP implements MapClassDAO{
-
-	public MapClass getMap() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void addMap(MapClass instance) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void editMap(int id, MapClass instance) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void deleteMap(MapClass instance) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-}
-
 class MapClass {
-
+	
 	public String name;
 	public UserClass creator;
 	public Visibility visibilite;
 	public ListLocationClass listLocationClass;
 	public Date creationDate;
-
+	
 	// constructors
 
 	public MapClass(String name, UserClass creator, Visibility visibilite) {
@@ -59,21 +35,21 @@ class MapClass {
 		Date date = new GregorianCalendar(2017, Calendar.FEBRUARY, 11).getTime();
 		this.creationDate = date;
 	}
-
+	
 	// methods
-
+	
 	public void ajouterUnLieu(LocationClass instance) {
 		this.listLocationClass.ajouteruneLocationClass(instance);
 	}
-
-	public MapClass devientChasseAuTresor(MapClass instance) {
-
+	
+	public MapClass devientChasseAuTresor(MapClass instance) {	
+		
 		instance.name = "Chasse au tresor";
 		instance.ajouterUnLieu(new LocationClass("Marche", 200, 100));
 		instance.ajouterUnLieu(new LocationClass("Bar", 70, 200));
 		return instance;
 	}
-
+	
 }
 
 @Path("/index")
@@ -83,7 +59,7 @@ public class Map implements MapClassDAO {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/MapClass")
 	public MapClass getMap() {
-
+		
 		MapClass instance = new MapClass("Liste des cafes", new UserClass("Hamza", "MudaMuda"), Visibility.PUBLIC);
 		instance.ajouterUnLieu(new LocationClass("Cafe de la Gare", 50, 100));
 		instance.ajouterUnLieu(new LocationClass("Cafe de la Paix", 70, 80));
@@ -96,15 +72,15 @@ public class Map implements MapClassDAO {
 	public void addMap(MapClass instance) {
 		System.out.println(instance.name);
 	}
-
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/MapClass/edit")
 	public void editMap(@FormParam("id") int id, MapClass instance) {
-
+		
 		System.out.println(instance.name);
 	}
-
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/MapClass/delete")
