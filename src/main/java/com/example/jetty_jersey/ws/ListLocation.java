@@ -10,70 +10,59 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface ListLocationClassDAO {
-	ListLocationClass getListLocation();
-	void addListLocation(ListLocationClass instance);
-	void editListLocation(int id, ListLocationClass instance);
-	void deleteListLocation(ListLocationClass instance);
-}
-
-class ListLocationClass {
-	
-	public ArrayList<LocationClass> list;
+@Path("/index")
+public class  ListLocation {
+	public ArrayList<Location> list;
 	
 	// constructors
 	
-	public ListLocationClass() {
-		this.list = new ArrayList<LocationClass>();
+	public ListLocation() {
+		this.list = new ArrayList<Location>();
 	}
 	
-	public ListLocationClass(ArrayList<LocationClass> list) {
+	public ListLocation(ArrayList<Location> list) {
 		this.list = list;
 	}
 	
 	// methods
 	
-	public void ajouteruneLocationClass(LocationClass instance) {
+	public void ajouteruneLocation(Location instance) {
 		this.list.add(instance);
 	}
 	
-}
-@Path("/index")
-public class ListLocation implements ListLocationClassDAO {
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/LocationClass/list")
-	public ListLocationClass getListLocation() {
+	@Path("/Location/list")
+	public ListLocation getListLocation() {
 		
-		ListLocationClass instance = new ListLocationClass();
-		instance.ajouteruneLocationClass(new LocationClass("Cafe de la Gare", 50, 100));
-		instance.ajouteruneLocationClass(new LocationClass("Cafe de la Paix", 70, 80));
+		ListLocation instance = new ListLocation();
+		instance.ajouteruneLocation(new Location("Cafe de la Gare", 50, 100));
+		instance.ajouteruneLocation(new Location("Cafe de la Paix", 70, 80));
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/LocationClass/add/list")
-	public void addListLocation(ListLocationClass instance) {
+	@Path("/Location/add/list")
+	public void addListLocation(ListLocation instance) {
 		
-		System.out.println("addListLocationClass done");
+		System.out.println("addListLocation done");
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/LocationClass/edit/list")
-	public void editListLocation(@FormParam("id") int id, ListLocationClass instance) {
+	@Path("/Location/edit/list")
+	public void editListLocation(@FormParam("id") int id, ListLocation instance) {
 		
-		System.out.println("editListLocationClass done");
+		System.out.println("editListLocation done");
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/LocationClass/delete/list")
-	public void deleteListLocation(ListLocationClass instance) {
+	@Path("/Location/delete/list")
+	public void deleteListLocation(ListLocation instance) {
 		
-		System.out.println("deleteListLocationClass done");
+		System.out.println("deleteListLocation done");
 	}
 
 }

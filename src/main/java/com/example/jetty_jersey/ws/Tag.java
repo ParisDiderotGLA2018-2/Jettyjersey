@@ -10,44 +10,37 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface TagDAO {
-	TagClass getTag();
-	void addTag(TagClass instance);
-	void editTag(int id, TagClass instance);
-	void deleteTag(TagClass instance);
-}
 
-class TagClass {
-	public String name;
-	
-	public TagClass(String name) {
-		this.name = name;
-	}
-}
+
+
 
 @Path("/index")
-public class Tag implements TagDAO {
-
+public class Tag {
+		public String name;
+		
+		public Tag(String name) {
+			this.name = name;
+	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/tag")
-	public TagClass getTag() {
+	public Tag getTag() {
 		
-		TagClass instance = new TagClass("Party");
+		Tag instance = new Tag("Party");
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/tag/add")
-	public void addTag(TagClass instance) {
+	public void addTag(Tag instance) {
 		System.out.println(instance.name);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/tag/edit")
-	public void editTag(@FormParam("id") int id, TagClass instance) {
+	public void editTag(@FormParam("id") int id, Tag instance) {
 		
 		System.out.println(instance.name);
 	}
@@ -55,7 +48,7 @@ public class Tag implements TagDAO {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/tag/delete")
-	public void deleteTag(TagClass instance) {
+	public void deleteTag(Tag instance) {
 		System.out.println(instance.name);
 	}
 

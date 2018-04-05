@@ -10,53 +10,43 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface MessageClassDAO {
-	MessageClass getMessage();
-	void addMessage(MessageClass instance);
-	void editMessage(int id, MessageClass instance);
-	void deleteMessage(MessageClass instance);
-}
-
-class MessageClass {
-	
-	public String text;
-	
-	public MessageClass(String text) {
-		this.text = text;
-	}
-}
 
 @Path("/index")
-public class Message implements MessageClassDAO {
+public class Message{
 
+	public String text;
+	
+	public Message(String text) {
+		this.text = text;
+	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/MessageClass")
-	public MessageClass getMessage() {
+	@Path("/Message")
+	public Message getMessage() {
 		
-		MessageClass instance = new MessageClass("J'adorerai venir !!");
+		Message instance = new Message("J'adorerai venir !!");
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/MessageClass/add")
-	public void addMessage(MessageClass instance) {
+	@Path("/Message/add")
+	public void addMessage(Message instance) {
 		System.out.println(instance.text);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/MessageClass/edit")
-	public void editMessage(@FormParam("id") int id, MessageClass instance) {
+	@Path("/Message/edit")
+	public void editMessage(@FormParam("id") int id, Message instance) {
 		
 		System.out.println(instance.text);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/MessageClass/delete")
-	public void deleteMessage(MessageClass instance) {
+	@Path("/Message/delete")
+	public void deleteMessage(Message instance) {
 		System.out.println(instance.text);
 	}
 
