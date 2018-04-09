@@ -25,19 +25,19 @@ import org.elasticsearch.common.xcontent.XContentType;
 
 import persistance.Bdd;
 
-
+import  javax.inject.Inject;
 
 @Path("/index")
 public class User{
 	public String login;
 	public String password;
 	
-	
+	@Inject
 	public User(String login) {
 		this.login = login;
 		this.password = "password";
 	}
-	
+	@Inject
 	public User(String login, String password) {
 		this.login = login;
 		this.password = password;
@@ -47,39 +47,17 @@ public class User{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public Response getUser(@QueryParam("name") String name) {
-		
-		if(name.equals("Benjamin")){
-			
 			User instance = new User("Benjamin", "Mudamuda");
 	        return Response.ok(instance).build();
-		}
-	    return Response.status(Status.NOT_FOUND).build();
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("test/insert/user")
 	public Response testInsertUser(@QueryParam("name") String name) {
 		String mdp = "Mudamuda";
-		User inst = new User(name,mdp);
-		TransportClient client = Bdd.connectionToBD();
-		Map<String, Object> json = new HashMap<String, Object>();
-		IndexResponse response = null;
-		try {
-			response = client.prepareIndex("user","name")
-			        .setSource(jsonBuilder()
-			                    .startObject()
-			                        .field("login", name)
-			                        .field("password", mdp)
-			                    .endObject()
-			                  )
-			        .get();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		response = client.prepareIndex("twitter", "tweet")
-		        .setSource(json, XContentType.JSON)
-		        .get();
+	//	response = client.prepareIndex("twitter", "tweet")
+	//	        .setSource(json, XContentType.JSON)
+		//        .get();
 		
 		return null;
 	}

@@ -16,23 +16,8 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.rest.RestStatus;
-
-import com.fasterxml.jackson.*;
-
-//import com.fasterxml.jackson.core.JsonFactory;
-//import org.elasticsearch.common.xcontent.json.*;
-//import org.codehaus.jackson.JsonGenerationException;
-//import org.codehaus.jackson.map.JsonMappingException;
-//import org.codehaus.jackson.map.ObjectMapper;
-//import org.elasticsearch.*;
-//import org.elasticsearch.client.Client;
-//import org.elasticsearch.client.transport.*;
 import org.elasticsearch.common.settings.Settings;
-//import org.elasticsearch.common.transport.*;
-//import org.elasticsearch.client.*;
-//import org.elasticsearch.transport.*;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
-//import org.elasticsearch.node.Node;
 
 public class Bdd {
 
@@ -51,6 +36,9 @@ public class Bdd {
 		}
 		return client;
 		
+	}
+	public static void disconnect(){
+		Bdd.client.close();
 	}
 	public static void test(String[] args) {
 		// TODO Auto-generated method stub

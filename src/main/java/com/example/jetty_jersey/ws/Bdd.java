@@ -17,7 +17,6 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.rest.RestStatus;
 
-import com.fasterxml.jackson.*;
 
 //import com.fasterxml.jackson.core.JsonFactory;
 //import org.elasticsearch.common.xcontent.json.*;
