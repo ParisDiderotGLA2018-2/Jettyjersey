@@ -18,6 +18,7 @@ import org.elasticsearch.index.reindex.UpdateByQueryAction;
 import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
 
 import com.example.jetty_jersey.ws.User;
+import com.example.jetty_jersey.ws.User.UserClass;
 
 /**
  * @author Valentin
@@ -34,7 +35,7 @@ public class UserDB implements UserDAO {
 		updateByQuery.source("user").abortOnVersionConflict(false);
 		BulkByScrollResponse response = updateByQuery.get();
 	}
-	public User getUser(String name) {
+	public UserClass getUser(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -42,8 +43,8 @@ public class UserDB implements UserDAO {
 	/* (non-Javadoc)
 	 * @see persistance.UserDAO#addUser(com.example.jetty_jersey.ws.User)
 	 */
-	public User addUser(User instance) {
-		User inst =  instance;
+	public UserClass addUser(UserClass instance) {
+		UserClass inst =  instance;
 		TransportClient client = Bdd.connectionToBD();
 		UserDB.authoriseModifUser();
 		Map<String, Object> json = new HashMap<String, Object>();
@@ -67,7 +68,7 @@ public class UserDB implements UserDAO {
 	 * Edit un utilisateur
 	 * TODO : tester edituser
 	 */
-	public void editUser(int id, User instance) {
+	public void editUser(int id, UserClass instance) {
 		TransportClient client = Bdd.connectionToBD();
 		UpdateRequest updateRequest = new UpdateRequest();
 		updateRequest.index("user");
@@ -96,7 +97,7 @@ public class UserDB implements UserDAO {
 	/* (non-Javadoc)
 	 * @see persistance.UserDAO#deleteUser(com.example.jetty_jersey.ws.User)
 	 */
-	public void deleteUser(User instance) {
+	public void deleteUser(UserClass instance) {
 		
 
 	}

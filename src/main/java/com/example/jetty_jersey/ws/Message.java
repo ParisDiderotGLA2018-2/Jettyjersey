@@ -13,32 +13,33 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/index")
 public class Message{
-
-	public String text;
-	
-	public Message(String text) {
-		this.text = text;
+	public static class MessageClass {
+		public String text;
+		
+		public MessageClass(String text) {
+			this.text = text;
+		}
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/Message")
-	public Message getMessage() {
+	public MessageClass getMessage() {
 		
-		Message instance = new Message("J'adorerai venir !!");
+		MessageClass instance = new MessageClass("J'adorerai venir !!");
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Message/add")
-	public void addMessage(Message instance) {
+	public void addMessage(MessageClass instance) {
 		System.out.println(instance.text);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Message/edit")
-	public void editMessage(@FormParam("id") int id, Message instance) {
+	public void editMessage(@FormParam("id") int id, MessageClass instance) {
 		
 		System.out.println(instance.text);
 	}
@@ -46,7 +47,7 @@ public class Message{
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Message/delete")
-	public void deleteMessage(Message instance) {
+	public void deleteMessage(MessageClass instance) {
 		System.out.println(instance.text);
 	}
 
