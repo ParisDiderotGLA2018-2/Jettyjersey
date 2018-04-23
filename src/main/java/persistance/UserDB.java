@@ -45,7 +45,7 @@ public class UserDB implements UserDAO {
 	public User addUser(User instance) {
 		User inst =  instance;
 		TransportClient client = Bdd.connectionToBD();
-		UserDB.authoriseModifUser();
+		//UserDB.authoriseModifUser();
 		Map<String, Object> json = new HashMap<String, Object>();
 		IndexResponse response = null;
 		try {
