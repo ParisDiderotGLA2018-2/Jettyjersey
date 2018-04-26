@@ -10,38 +10,29 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface ListImageClassDAO {
-	ListImageClass getListImage();
-	void addListImage(ListImageClass instance);
-	void editListImage(int id, ListImageClass instance);
-	void deleteListImage(ListImageClass instance);
-}
-
-class ListImageClass {
-	
-	public ArrayList<ImageClass> list;
-	
-	// constructors
-	
-	public ListImageClass() {
-		this.list = new ArrayList<ImageClass>();
-	}
-	
-	public ListImageClass(ArrayList<ImageClass> list) {
-		this.list = list;
-	}
-	
-	// methods
-	
-	public void ajouterUneImageClass(String name) {
-		this.list.add(new ImageClass(name));
-	}
-	
-}
+import com.example.jetty_jersey.ws.Image.ImageClass;
 
 @Path("/index")
-public class ListImage implements ListImageClassDAO {
-
+public class ListImage {
+	public static class ListImageClass {
+		public ArrayList<ImageClass> list;
+		
+		// constructors
+		
+		public ListImageClass() {
+			this.list = new ArrayList<ImageClass>();
+		}
+		
+		public ListImageClass(ArrayList<ImageClass> list) {
+			this.list = list;
+		}
+		
+		// methods
+		
+		public void ajouterUneImageClass(String name) {
+			this.list.add(new ImageClass(name));
+		}
+	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/ImageClass/list")

@@ -15,40 +15,42 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/index")
 public class Location{
-	public String name;
-	public int posX;
-	public int posY;
-	public ListMessage listMessage;
-	public ListImage listImage;
+	public static class LocationClass {
+		public String name;
+		public int posX;
+		public int posY;
+		public ListMessage listMessage;
+		public ListImage listImage;
 
-	
-	public Location(String name, int posX, int posY) {
-		this.name = name;
-		this.posX = posX;
-		this.posY = posY;
-		this.listMessage = new ListMessage();
-		this.listImage = new ListImage();
+		
+		public LocationClass(String name, int posX, int posY) {
+			this.name = name;
+			this.posX = posX;
+			this.posY = posY;
+			this.listMessage = new ListMessage();
+			this.listImage = new ListImage();
+		}
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/Location")
-	public Location getLocation() {
+	public LocationClass getLocation() {
 		
-		Location instance = new Location("Cafe de la Gare", 50, 100);
+		LocationClass instance = new LocationClass("Cafe de la Gare", 50, 100);
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Location/add")
-	public void addLocation(Location instance) {
+	public void addLocation(LocationClass instance) {
 		System.out.println(instance.name);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Location/edit")
-	public void editLocation(@FormParam("id") int id, Location instance) {
+	public void editLocation(@FormParam("id") int id, LocationClass instance) {
 		
 		System.out.println(instance.name);
 	}
@@ -56,7 +58,7 @@ public class Location{
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Location/delete")
-	public void deleteLocation(Location instance) {
+	public void deleteLocation(LocationClass instance) {
 		System.out.println(instance.name);
 	}
 

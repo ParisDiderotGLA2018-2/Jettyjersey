@@ -10,24 +10,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-interface ImageClassDAO {
-	ImageClass getImage();
-	void addImage(ImageClass instance);
-	void editImage(int id, ImageClass instance);
-	void deleteImage(ImageClass instance);
-}
-
-class ImageClass {
-	
-	public String name;
-	
-	public ImageClass(String name) {
-		this.name = name;
-	}
-	
-}
 @Path("/index")
-public class Image implements ImageClassDAO {
+public class Image {
+	
+	public static class ImageClass {
+		
+		public String name;
+		public ImageClass(String name) {
+			this.name = name;
+		}
+	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

@@ -10,67 +10,72 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.example.jetty_jersey.ws.User.UserClass;
+import com.example.jetty_jersey.ws.Location.LocationClass;
+
 
 
 
 @Path("/index")
 public class Map {
+	public static class MapClass {
+		public String name;
+		public UserClass creator;
+		public Visibility visibilite;
+		public ListLocation listLocation;
+		public Date creationDate;
 
-	public String name;
-	public User creator;
-	public Visibility visibilite;
-	public ListLocation listLocation;
-	public Date creationDate;
+		// constructors
 
-	// constructors
-
-	public Map(String name, User creator, Visibility visibilite) {
-		this.name = name;
-		this.creator = creator;
-		this.visibilite = visibilite;
-		this.listLocation = new ListLocation();
-		Date date = new GregorianCalendar(2017, Calendar.FEBRUARY, 11).getTime();
-		this.creationDate = date;
+		public MapClass(String name, UserClass creator, Visibility visibilite) {
+			this.name = name;
+			this.creator = creator;
+			this.visibilite = visibilite;
+			this.listLocation = new ListLocation();
+			Date date = new GregorianCalendar(2017, Calendar.FEBRUARY, 11).getTime();
+			this.creationDate = date;
+		}
+		
+		/**
+		 * @bug : comprend pas Valentin
+		 * @param instance
+		 */
+		public void ajouterUnLieu(LocationClass instance) {
+			//TODO : this.listLocation.ajouteruneLocation(instance);
+		}
+		
+		public MapClass devientChasseAuTresor(MapClass instance) {
+			instance.name = "Chasse au tresor";
+			instance.ajouterUnLieu(new LocationClass("Marche", 200, 100));
+			instance.ajouterUnLieu(new LocationClass("Bar", 70, 200));
+			return instance;
+		}
 	}
-
-	// methods
-	/**
-	 * @bug : comprend pas Valentin
-	 * @param instance
-	 */
-	public void ajouterUnLieu(Location instance) {
-		//TODO : this.listLocation.ajouteruneLocation(instance);
-	}
-
-	public Map devientChasseAuTresor(Map instance) {
-
-		instance.name = "Chasse au tresor";
-		instance.ajouterUnLieu(new Location("Marche", 200, 100));
-		instance.ajouterUnLieu(new Location("Bar", 70, 200));
-		return instance;
-	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/Map")
-	public Map getMap() {
-
-		Map instance = new Map("Liste des cafes", new User("Hamza", "MudaMuda"), Visibility.PUBLIC);
-		instance.ajouterUnLieu(new Location("Cafe de la Gare", 50, 100));
-		instance.ajouterUnLieu(new Location("Cafe de la Paix", 70, 80));
+	public MapClass getMap() {
+		UserClass us = new UserClass();
+		us.login = "Hamza";
+		us.password = "Mudamuda";
+		MapClass instance = new MapClass("Liste des cafes", us, Visibility.PUBLIC);
+		instance.ajouterUnLieu(new LocationClass("Cafe de la Gare", 50, 100));
+		instance.ajouterUnLieu(new LocationClass("Cafe de la Paix", 70, 80));
 		return instance;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Map/add")
-	public void addMap(Map instance) {
+	public void addMap(MapClass instance) {
 		System.out.println(instance.name);
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Map/edit")
-	public void editMap(@FormParam("id") int id, Map instance) {
+	public void editMap(@FormParam("id") int id, MapClass instance) {
 
 		System.out.println(instance.name);
 	}
@@ -78,7 +83,7 @@ public class Map {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Map/delete")
-	public void deleteMap(Map instance) {
+	public void deleteMap(MapClass instance) {
 		System.out.println(instance.name);
 	}
 

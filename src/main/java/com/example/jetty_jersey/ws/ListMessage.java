@@ -9,35 +9,35 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-
+import com.example.jetty_jersey.ws.Message.MessageClass;
 
 @Path("/index")
 public class ListMessage {
-
-	public ArrayList<Message> list;
-	
-	// constructors
-	
-	public ListMessage() {
-		this.list = new ArrayList<Message>();
-	}
-	
-	public ListMessage(ArrayList<Message> list) {
-		this.list = list;
-	}
-	
-	// methods
-	
-	public void ajouterUnMessage(String name) {
-		this.list.add(new Message(name));
+	public static class ListMessageClass{
+		public ArrayList<MessageClass> list;
+		
+		// constructors
+		
+		public ListMessageClass() {
+			this.list = new ArrayList<MessageClass>();
+		}
+		
+		public ListMessageClass(ArrayList<MessageClass> list) {
+			this.list = list;
+		}
+		
+		// methods
+		
+		public void ajouterUnMessage(String name) {
+			this.list.add(new MessageClass(name));
+		}
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/Message/list")
-	public ListMessage getListMessage() {
+	public ListMessageClass getListMessage() {
 		
-		ListMessage instance = new ListMessage();
+		ListMessageClass instance = new ListMessageClass();
 		instance.ajouterUnMessage("J'adorerai venir !!");
 		instance.ajouterUnMessage("C'est payant ?");
 		return instance;
@@ -46,7 +46,7 @@ public class ListMessage {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Message/add/list")
-	public void addListMessage(ListMessage instance) {
+	public void addListMessage(ListMessageClass instance) {
 		
 		System.out.println("addListMessage done");
 	}
@@ -54,7 +54,7 @@ public class ListMessage {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Message/edit/list")
-	public void editListMessage(@FormParam("id") int id, ListMessage instance) {
+	public void editListMessage(@FormParam("id") int id, ListMessageClass instance) {
 		
 		System.out.println("editListMessage done");
 	}
@@ -62,7 +62,7 @@ public class ListMessage {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Message/delete/list")
-	public void deleteListMessage(ListMessage instance) {
+	public void deleteListMessage(ListMessageClass instance) {
 		
 		System.out.println("deleteListMessage done");
 	}

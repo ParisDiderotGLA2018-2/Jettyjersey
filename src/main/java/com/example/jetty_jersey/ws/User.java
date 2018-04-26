@@ -29,25 +29,20 @@ import  javax.inject.Inject;
 
 @Path("/index")
 public class User{
-	public String login;
-	public String password;
 	
-	@Inject
-	public User(String login) {
-		this.login = login;
-		this.password = "password";
+	public static class UserClass {
+		public String login;
+		public String password;
 	}
-	@Inject
-	public User(String login, String password) {
-		this.login = login;
-		this.password = password;
-	}
+
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public Response getUser(@QueryParam("name") String name) {
-			User instance = new User("Benjamin", "Mudamuda");
+			UserClass instance = new UserClass();
+			instance.login = "Benjamin";
+			instance.password = "Mudamuda";
 	        return Response.ok(instance).build();
 	}
 	@GET
@@ -65,10 +60,12 @@ public class User{
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login/add")
-	public User addUser(User instance) {
+	public UserClass addUser(UserClass instance) {
 		String name = instance.login;
 		String mdp = instance.password;
-		User inst = new User(name,mdp);
+		UserClass inst = new UserClass();
+		inst.login = name;
+		inst.password = mdp;
 		TransportClient client = Bdd.connectionToBD();
 		Map<String, Object> json = new HashMap<String, Object>();
 		IndexResponse response = null;
@@ -91,15 +88,9 @@ public class User{
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login/edit")
-	public void editUser(@FormParam("id") int id, User instance) {
+	public void editUser(@FormParam("id") int id, UserClass instance) {
 		
-		/**
-		 * id : l'id du user a modifier (son nom)
-		 * instance : le nouvel objet User complet
-		 * 
-		 * On cherchera dans la BDD le User ayant comme cle id
-		 * puis on set chacun de ses attributs par ceux de instance
-		 */
+		
 
 		System.out.println(instance.login);
 	}
@@ -107,7 +98,7 @@ public class User{
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login/delete")
-	public void deleteUser(User instance) {
+	public void deleteUser(UserClass instance) {
 		System.out.println(instance.login);
 	}
 
